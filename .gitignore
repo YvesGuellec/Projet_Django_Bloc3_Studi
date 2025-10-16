@@ -1,0 +1,42 @@
+# --- Environnement virtuel ---
+venv/
+env/
+
+# --- Fichiers Python compilés ---
+__pycache__/
+*.py[cod]
+*$py.class
+
+# --- Base de données locale (si tu utilises SQLite) ---
+
+
+# --- Variables d'environnement ---
+.env
+
+# --- Logs et fichiers temporaires ---
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+*.mo
+*.swp
+*.swo
+*.bak
+*.tmp
+
+# --- Dossiers de cache ou build ---
+node_modules/
+build/
+dist/
+static/
+media/
+
+# --- Fichiers de l’OS / éditeurs ---
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.iml
+

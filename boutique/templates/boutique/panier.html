@@ -1,0 +1,83 @@
+{% extends 'layouts/base.html' %}
+{% block title %}Votre Panier{% endblock %}
+{% block body %}
+
+<h3>Panier</h3>
+<ol class="list-group list-group-numbered">
+    {% if articles %}
+        {% for ligne in articles %}
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+                <div class="fw-bold">{{ ligne.produit.nom }}</div>
+                Quantité : {{ ligne.quantite }}
+            </div>
+            <span class="badge bg-primary rounded-pill">{{ ligne.quantite }}</span>
+        </li>
+        {% endfor %}
+      
+    {% else %}
+        <li class="list-group-item">Votre panier est vide.</li>
+        </ol>
+    {% endif %}
+
+<div class="container mt-3 d-flex justify-content-between align-items-center">
+           <h5><strong>Total :</strong><span><strong>{{ total }} €</strong></span> </h5>
+</div>
+
+<div class = "container mt-3">
+
+    <a href="{% url 'boutique:panier_supprimer' %}" class="btn btn-outline-danger">Supprimez votre panier</a>
+
+        <a href="{% url 'boutique:index' %}" class="btn btn-primary">Continuer vos achats</a>
+
+            <button id="btn-commander" class="btn btn-success">Payer votre Commande</button>
+</div>
+
+
+{% endblock %}
+
+{% block JavaScript %} 
+
+<script>
+
+function getCSRFToken() {
+    const name = 'csrftoken';
+    const cookieValue = document.cookie
+        .split('; ')
+        .find(row => row.startsWith(name + '='))
+        ?.split('=')[1];
+    return cookieValue;
+}
+
+const commanderBtn = document.querySelector("#btn-commander");
+if (commanderBtn) {
+    commanderBtn.addEventListener("click", function() {
+        fetch("/commander/", {
+            method: "POST",
+            headers: {
+                "X-CSRFToken": getCSRFToken()
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.message) {
+                alert(data.message);
+                location.reload();
+            } else {
+                alert("Erreur : " + data.error);
+            }
+            // redirection vers la page de récap
+            if (data.redirect_url) {
+        window.location.href = data.redirect_url;
+    }
+        })
+        .catch(err => {
+            console.error("Erreur :", err);
+            alert("Une erreur est survenue.");
+        });
+    });
+}
+    
+</script>
+
+{% endblock JavaScript %} 

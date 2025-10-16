@@ -1,0 +1,21 @@
+{% extends 'layouts/base.html' %}
+
+{% load static %}
+
+{% block title %}QR code de la commande{% endblock title %}
+
+{% block body %}
+
+ <div class="card" style="width: 16rem;">
+  <img class="card-img-top" src="{{ qr_image }}" alt="QR Code">
+  <div class="card-body">
+    <h5 class="card-title">QR Code de la commande n°{{ commande.id }}</h5>
+    <p class="card-text">Merci de votre achat, en esperant vous revoir, à très vite.
+        <br>Un mail vous a été envoyé avec votre justificatif d'achat et votre E-Billet</p>
+  </div>
+</div>
+
+
+    <p>Scannez ce QR code pour vérifier votre commande.</p>
+
+{% endblock body %}

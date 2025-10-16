@@ -1,0 +1,16 @@
+{% load static %}
+
+<h2>{% block title %}Vérification de connexion{% endblock title %}</h2>
+
+{% block body %}
+
+<div class="container text text-center">
+<form method="POST">
+  {% csrf_token %}
+  <h3><label for="code">Code reçu par email :</label></h3>
+  <input type="text" name="code" required>
+  <button type="submit">Vérifier</button>
+</form>
+</div>
+
+{% endblock body %}
