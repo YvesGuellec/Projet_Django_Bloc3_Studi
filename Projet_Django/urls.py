@@ -8,10 +8,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('vitrine.urls')),
     path('', include('boutique.urls', namespace='boutique')),
-    path('', include('comptes.urls')),
-    
-    
+    path('', include('comptes.urls')), 
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
