@@ -12,9 +12,8 @@
     <div class="col">
         <div class="card mb-3 shadow" style='width: 15rem;'>
             {% if sport.image %}
-            <img src="{{ sport.image.url }}" class="card-img-top text-align" alt="...">
+            <img src="{{ sport.image.url|default:sport.image }}" alt="{{ sport.titre }}">
             {% endif %}
-
             <div class="card-body">
                 <h5 class="card-title">{{sport.titre}}</h5>
                 <a href="{% url 'boutique:index' %}" class="btn btn-primary">Achat E-Ticket</a>
