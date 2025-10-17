@@ -11,12 +11,14 @@
     {% for sport in sports %}
     <div class="col">
         <div class="card mb-3 shadow" style='width: 15rem;'>
-            {% if sport.image %}
-    {% if "res.cloudinary.com" in sport.image.url %}
-        <img src="{{ sport.image.url }}" alt="{{ sport.titre }}">
-    {% else %}
+{% if sport.image %}
+    {% if "res.cloudinary.com" in sport.image|stringformat:"s" %}
         <img src="{{ sport.image }}" alt="{{ sport.titre }}">
+    {% else %}
+        <img src="{{ sport.image.url }}" alt="{{ sport.titre }}">
     {% endif %}
+{% endif %}
+
             <div class="card-body">
                 <h5 class="card-title">{{sport.titre}}</h5>
                 <a href="{% url 'boutique:index' %}" class="btn btn-primary">Achat E-Ticket</a>
