@@ -3,6 +3,8 @@ from pathlib import Path
 from decouple import config
 import cloudinary
 from cloudinary.uploader import upload
+import dj_database_url
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -62,16 +64,24 @@ TEMPLATES = [
 WSGI_APPLICATION = 'Projet_Django.wsgi.application'
 
 # --- Base de données ---
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config("DB_NAME"),
-        'USER': config("DB_USER"),
-        'PASSWORD': config("DB_PASSWORD"),
-        'HOST': config("DB_HOST", default=""),
-        'PORT': config("DB_PORT", default="5432"),
+if os.environ.get('RENDER'):  # Variable que Render définit automatiquement
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=os.environ.get('DATABASE_URL'),
+            conn_max_age=600,
+        )
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': config("DB_NAME"),
+            'USER': config("DB_USER"),
+            'PASSWORD': config("DB_PASSWORD"),
+            'HOST': config("DB_HOST", default=""),
+            'PORT': config("DB_PORT", default="5432"),
+        }
+    }
 
 # --- Cloudinary (médias) ---
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
