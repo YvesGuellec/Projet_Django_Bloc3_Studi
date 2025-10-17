@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: Projet_Django.wsgi
+    name: Projet_Django
     env: python
     buildCommand: "pip install -r requirements.txt && python manage.py collectstatic --noinput"
     startCommand: "gunicorn Projet_Django.wsgi"
