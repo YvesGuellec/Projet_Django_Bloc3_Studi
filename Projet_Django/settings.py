@@ -114,6 +114,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # --- Email (dev seulement) ---
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+# --- Cloudinary (médias) ---
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
 # cloudinary
 cloudinary.config(
     cloud_name=config("CLOUD_NAME"),
@@ -122,5 +125,3 @@ cloudinary.config(
     secure=True
 )
 
-# --- Cloudinary (médias) ---
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
