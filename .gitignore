@@ -40,3 +40,6 @@ Thumbs.db
 .vscode/
 *.iml
 
+# Fichier local media 
+sport_media/
+media/
