@@ -15,16 +15,17 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='127.0.0.1,localhost').split(','
 
 # --- Applications ---
 INSTALLED_APPS = [
+    # Cloudinary
+    'cloudinary',
+    'cloudinary_storage',
+
+    # Apps Django
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    # Cloudinary
-    'cloudinary',
-    'cloudinary_storage',
 
     # Tes apps
     'boutique.apps.BoutiqueConfig',
@@ -84,8 +85,6 @@ else:
         }
     }
 
-# --- Cloudinary (médias) ---
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # --- Fichiers statiques ---
 STATIC_URL = '/static/'
@@ -95,10 +94,6 @@ STATICFILES_DIRS = [
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-# --- Fichiers médias ---
-MEDIA_URL = '/media/'
-# MEDIA_ROOT = BASE_DIR / 'media'
 
 # --- Authentification ---
 AUTH_PASSWORD_VALIDATORS = [
@@ -126,3 +121,6 @@ cloudinary.config(
     api_secret=config("API_SECRET"),
     secure=True
 )
+
+# --- Cloudinary (médias) ---
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
